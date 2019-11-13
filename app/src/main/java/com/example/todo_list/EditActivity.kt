@@ -16,6 +16,8 @@ class EditActivity : AppCompatActivity() {
 
     //인스턴스를 얻는다.
     val realm = Realm.getDefaultInstance()
+
+    //현재 오늘 날짜를 얻는다.
     val calendar: Calendar = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,8 +25,10 @@ class EditActivity : AppCompatActivity() {
         setContentView(R.layout.activity_edit)
 
         val id = intent.getLongExtra("id",-1L)
+        //만약 +버튼을 누르게 된다면 intent에서 넘어오는 값이 없기 때문에 id가 -1L값을 가지게 되고, insertMode() 함수로 들어간다.
         if(id == -1L) insertMode()
         else{
+            //리스트 뷰에 있는 아이템을 클릭하는 경우 intent에서 id값이 넘어오기 때문에 updateMode()로 간다.
             updateMode(id)
         }
 
@@ -116,7 +120,6 @@ class EditActivity : AppCompatActivity() {
                 finish()
             }
         }.show()
-
     }
 
     //다음 Id를 반환
