@@ -5,6 +5,7 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity;
 
 import kotlinx.android.synthetic.main.activity_main2.*
+import org.jetbrains.anko.startActivity
 
 class Main2Activity : AppCompatActivity() {
 
@@ -13,10 +14,10 @@ class Main2Activity : AppCompatActivity() {
         setContentView(R.layout.activity_main2)
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+        fab.setOnClickListener {
+            startActivity<EditActivity>()
         }
+
     }
 
 }
