@@ -38,6 +38,39 @@ class EditActivity : AppCompatActivity() {
         }.show()
     }
 
+    private fun updateTodo(id: Long){
+        realm.beginTransaction()
+
+        //"id" 컬럼에 id 값이 있다면 findFirst() 메서드로 첫 번째 데이터를 반환한다.
+        val updateItem = realm.where<Todo>().equalTo("id",id).findFirst()!!
+
+        updateItem.title = todoEditText.text.toString()
+        updateItem.date = calendar.timeInMillis
+
+        realm.commitTransaction()
+
+        alert("내용이 변경되었습니다.") {
+            yesButton { finish() }
+        }.show()
+    }
+
+    private fun deleteTodo(id: Long){
+        realm.beginTransaction()
+
+        val deleteItem = realm.where<Todo>().equalTo("id",id).findFirst()!!
+
+        deleteItem.deleteFromRealm()
+
+        realm.commitTransaction()
+
+        alert("내용이 삭제되었습니다.") {
+            yesButton {
+                finish()
+            }
+        }.show()
+
+    }
+
     //다음 Id를 반환
     //Realm은 기본키 자동 기능을 지원하지 않기 때문에 id값중 최댓값에다 1을 더한 id값을 반환해준다.
     private fun nextId() : Int{
